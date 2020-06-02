@@ -2,36 +2,16 @@
 
 namespace formes;
 
-class Rectangle {
-    private $longueur;
-    private $hauteur;
-    private $cheminImage;
+use formes\Forme;
 
-    public function __construct($longueur, $hauteur)
+class Rectangle extends Forme {
+
+    public function dessinerSpecifique($image, $couleur) {
+        imagefilledrectangle($image, 2, 2, $this->longueur, $this->hauteur, $couleur);
+    }
+
+    public function getNomClasse()
     {
-        $this->longueur = $longueur;
-        $this->hauteur = $hauteur;
-    }
-
-
-    public function __toString()
-    {
-        return 'Rectangle(' . $this->longueur . ', ' . $this->hauteur . ')';
-    }
-
-    public function dessiner() {
-        $im = imagecreatetruecolor($this->longueur + 4, $this->hauteur + 4);
-        $white = imagecolorallocate($im, 255, 255, 255);
-
-        imagefilledrectangle($im, 2, 2, $this->longueur, $this->hauteur, $white);
-
-        $this->cheminImage = './img/rectangle_' . $this->longueur . '_' . $this->hauteur . '.png';
-
-        imagepng($im, $this->cheminImage);
-        imagedestroy($im);
-    }
-
-    public function getImageHTML() {
-        return '<img src="' . $this->cheminImage . '"/>';
+        return 'Rectangle';
     }
 }
