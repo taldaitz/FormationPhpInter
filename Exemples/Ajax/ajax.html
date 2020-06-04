@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<title>AJAX</title>
+		<style>button{cursor: pointer;}</style>
+		<script>
+
+			/*
+			*	Connect to XML
+			*/
+			function getXhr () {
+				// XML Http Request
+				var xhr = "";
+
+				if(window.XMLHttpRequest){	// Firefox, Chrome, Safari, Opera
+					xhr = new XMLHttpRequest();
+					console.log("XMLHttpRequest");
+				}else if(window.ActivXObject){	// IE
+					try{
+						xhr = new ActivXObject("Msxml2.XMLHTTP");
+						console.log("Msxml2.XMLHTTP");
+					}catch(e){
+						xhr = new ActivXObject("Microsoft.XMLHTTP");
+						console.log("Microsoft");
+					}
+				}else{
+					xhr = false;
+				}
+
+				return xhr;
+			}
+
+
+			function getList() {
+				var xhr = getXhr();
+
+				var url = "liste.xml";
+				var html = "";
+				var nom, prenom;
+
+				xhr.open("GET", url, true);
+				xhr.send();
+
+				xhr.onreadystatechange = function() {
+
+					/**
+						xhr.readyState										xhr.status
+					*	0	= non initialisé								200	= tout bien passé
+					*	1	= communication vers le serveur établie			404	= adresse fournie introuvable
+					*	2	= requête reçue
+					*	3	= traitement de la requête
+					*	4	= requête terminée
+					*/
+
+					if (xhr.readyState==4 && xhr.status==200) {
+
+						var xml = xhr.responseXML;
+						//var reponseBrut = xhr.response;
+						var personnes = xml.getElementsByTagName('personne');
+
+						html += "<ul>";
+						for (i=0; i<personnes.length; i++){
+							nom = personnes[i].getElementsByTagName('nom')[0].innerHTML;
+							prenom = personnes[i].getElementsByTagName('prenom')[0].innerHTML;
+							html += "<li>" + nom + " " + prenom + "</li>";
+						}
+						html += "</ul>";
+						document.getElementById('content').innerHTML = html;
+					}
+
+				};
+
+
+
+			}
+
+		</script>
+</head>
+
+
+<body >
+
+	<section style="width:1014px; margin:auto;">
+		<h1>AJAX</h1>
+		<hr/>
+
+		<button onclick="getList();">Récupérer tout</button>
+
+		<p id="content"></p>
+
+
+	</section>
+</body>
+</html>

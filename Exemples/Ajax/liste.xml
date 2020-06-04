@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<personnes>
+	<personne civilite="Monsieur">
+		<nom>Aldaitz</nom>
+		<prenom>Thomas</prenom>
+		<age>33</age>
+		<naissance jour="28" mois="04" annee="1985" />
+		<adresse>
+			<numero>221</numero>
+			<rue>Rue du test</rue>
+			<cp>69007</cp>
+			<ville>Lyon</ville>
+		</adresse>
+	</personne>
+	<personne civilite="Madame">
+		<nom>Doe</nom>
+		<prenom>Jeanne</prenom>
+		<age>33</age>
+		<naissance jour="34" mois="13" annee="2024" />
+		<adresse>
+			<numero>404</numero>
+			<rue>Rue inconnue</rue>
+			<cp>01000</cp>
+			<ville>Nulle-Part</ville>
+		</adresse>
+	</personne>
+	<personne civilite="Monsieur">
+		<nom>Toto</nom>
+		<prenom>Jean</prenom>
+	</personne>
+	<personne civilite="Mademoiselle">
+		<nom>Lili</nom>
+		<prenom>Marion</prenom>
+	</personne>
+</personnes>
