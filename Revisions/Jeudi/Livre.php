@@ -25,27 +25,32 @@ class Livre {
 
     public static function getById(int $id) : Livre {
 
-        $sql = "SELECT * FROM `livre` WHERE id = :id";
-        $db = new PDO('mysql:host=localhost;dbname=security;charset=utf8', 'root', '');
+        try {
+            $sql = "SELECT * FROM `livre` WHERE id = :id";
+            $db = new PDO('mysql:host=localhost;dbname=security;charset=utf8', 'root', '');
 
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
 
-        /*
-        Fetch traditionel
-        $resultat = $stmt->fetch();
+            /*
+            Fetch traditionel
+            $resultat = $stmt->fetch();
 
-        $livre = new Livre();
-        $livre->id = $resultat['id'];
-        $livre->titre = $resultat['titre'];
-        $livre->auteur = $resultat['auteur'];
-        $livre->nbPages = $resultat['nbPages'];*/
+            $livre = new Livre();
+            $livre->id = $resultat['id'];
+            $livre->titre = $resultat['titre'];
+            $livre->auteur = $resultat['auteur'];
+            $livre->nbPages = $resultat['nbPages'];*/
 
 
-        //Fetch par classe
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Livre');
-        $livre = $stmt->fetch();
+            //Fetch par classe
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Livre');
+            $livre = $stmt->fetch();
+        } 
+        catch(Exception $e) {
+            echo $e->getCode() . ' - ' . $e->getMessage();
+        }
 
 
         return $livre;
@@ -65,7 +70,7 @@ echo $book;
 
 
 $i = 5;
-$y = 2;
+$y = 0;
 
 $num = $i / $y;
 
