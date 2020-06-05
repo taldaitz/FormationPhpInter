@@ -1,0 +1,24 @@
+.RecapPerso {
+    display: inline-block;
+    min-height: 200px;
+    text-align: center;
+}
+
+#menuPersoA {
+    background-color: paleturquoise;
+    float: left;
+}
+
+
+#menuPersoB {
+    background-color: palegoldenrod;
+    float: right;
+}
+
+#logCombat {
+    padding-left: 200px;
+}
+
+p {
+    text-align: left;
+}
